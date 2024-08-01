@@ -1,0 +1,50 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+        <!-- Page Header-->
+        <header class="masthead font-monospace fw-bold" id="index_bgimage" >
+            <div class="container position-relative px-3"> 
+                <div class="row gx-3 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading font-monospace fw-bold">
+                            <h1>Start-Up CyberCorpsCm</h1>
+                            <span class="subheading">Blog des nouvelles tendances d'informatiques et des astuces informatique au quotidien</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container ">
+            <div class="row  ">
+                <div class=" row justify-content-center">
+                    {% if posts %}
+                    {% for post in posts %}
+                    <div class="card col-12 col-md-6 p-3 m-3" style="width: 18rem;">
+                        <img src="{% static 'img\posts\ntic.webp'%}" class="card-img-top" alt="post example">
+                        <div class="card-body">
+                          <h5 class="card-title font-monospace fw-bold">{{ post.titre }}</h5>
+                          <p class="card-text font-monospace fw-bold">{{ post.sous_titre}}</p>
+                          <p class="card-text">Posted by
+                            <a href="#!">{{ post.nom_poster }}</a>
+                            {{ date_post }}</p>
+                          <a href="{% url 'post' post.id %}" class="btn btn-primary">Lire Plus</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <hr class="my-4" />
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                    
+                    {% else %}
+                        <p class="bg-secondary text-uppercase text-center text-warning"> Aucun post pour le moment</p>
+                    {% endif %}
+
+                    <!-- Pager-->
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

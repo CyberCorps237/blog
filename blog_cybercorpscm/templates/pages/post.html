@@ -1,0 +1,47 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    {% if posts_detail %}
+
+        <style>
+            header#post_bgimage{
+            background-image: url('/static/img/post-bg.jpg') !important; 
+            background-repeat: no-repeat;
+            background-size: cover;
+            }
+        </style>
+        <header class="masthead" id="post_bgimage">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading font-monospace fw-bold">
+                            <h1 class="font-monospace fw-bold">{{ posts_detail.titre }}</h1>
+                            <h2 class="subheading font-monospace fw-bold">{{ posts_detail.sous_titre}}</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">{{ posts_detail.nom_poster}}</a>
+                                {{ posts_detail.date_post }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4 font-monospace">
+            <div class="container ">
+                <div class="row  justify-content-center">
+                    <div class="col-md-12 col-lg-10 col-xl-9">
+                        <p>
+                            {{ posts_detail.contenu_post|safe }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    {% endif %}
+{% endblock %}

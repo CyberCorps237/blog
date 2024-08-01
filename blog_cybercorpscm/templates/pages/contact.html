@@ -1,0 +1,90 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+        <!-- Page Header-->
+        <header class="masthead font-monospace fw-bold"  id="contact_bgimage">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading font-monospace fw-bold">
+                            <h1>Contact Me</h1>
+                            <span class="subheading">Have questions? I have answers.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main class="mb-4 font-monospace fw-bold">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
+                        <div class="my-5">
+                            
+                            <form id="contactForm" method="post">
+                                {%csrf_token %}
+
+                                {% if erreur_total %}
+                                    <p class="text-center text-dark text-9 alert bg-danger">{{ erreur_total}}</p>
+                                {% endif %}
+                                <div class="form-floating">
+                                    <input class="form-control" id="name" name="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                    <label for="name">Name</label>
+                                    {% if erreur_name  %}
+                                    <p class="text-danger" id="name_erreur" data-sb-feedback="name:required">{{ erreur_name }}</p>
+                                    {% endif %}
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="email" name="email" type="email" placeholder="Enter your email..." data-sb-validations="required,email" />
+                                    <label for="email">Email address</label>
+                                    {% if erreur_email %}
+                                    <p class=" text-danger" id="email_erreur" data-sb-feedback="email:required">{{erreur_email}}</p>
+                                    <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="phone" type="tel" name="phone" placeholder="Enter your phone number..." data-sb-validations="required" />
+                                    <label for="phone">Phone Number</label>
+                                    {% if erreur_tel %}
+                                    <div class="text-danger" id="phone_erreur" data-sb-feedback="phone:required">{{ erreur_tel }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="message" name="message" placeholder="Enter your message here..." style="height: 12rem" data-sb-validations="required"></textarea>
+                                    <label for="message">Message</label>
+                                    {% if erreur_message %}
+                                    <div class="invalid-feedback"  id="name_erreur"data-sb-feedback="message:required">{{ erreur_message }}</div>
+                                    {% endif %}
+                                </div>
+                                <br />
+                                <!-- Submit success message-->
+                                <!---->
+                                <!-- This is what your users will see when the form-->
+                                <!-- has successfully submitted-->
+                                <div class="d-none" id="submitSuccessMessage">
+                                    <div class="text-center mb-3">
+                                        <div class="fw-bolder">Form submission successful!</div>
+                                        <br />
+                                    </div>
+                                </div>
+                                <!-- Submit error message-->
+                                <!---->
+                                <!-- This is what your users will see when there is-->
+                                <!-- an error submitting the form-->
+                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                                <!-- Submit Button-->
+                                <button class="btn btn-primary text-uppercase " id="submitButton" type="submit">Envoyer</button>
+                            </form> 
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </main>
+        <script src="{% static 'js\submit.js' %}"></script>
+{% endblock %}
